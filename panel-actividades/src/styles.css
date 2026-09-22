@@ -182,3 +182,29 @@ p  { margin: 0 0 .8rem; }
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.lista {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.lista > li,
+.tarjeta,
+.metrica,
+.campo {
+  min-width: 0;
+}
+
+.tarjeta h3,
+.tarjeta p {
+  overflow-wrap: anywhere;
+}
+
+.campo input,
+.campo select {
+  max-width: 100%;
+}
