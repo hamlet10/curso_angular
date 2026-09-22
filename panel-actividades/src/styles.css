@@ -133,3 +133,52 @@ p  { margin: 0 0 .8rem; }
   border-top: 1px solid #cbd5e1;
   color: #52606d;
 }
+
+.cabecera .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.presentacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metricas {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.lista {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.filtros,
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .metricas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
