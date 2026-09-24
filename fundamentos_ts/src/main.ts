@@ -1,10 +1,4 @@
-console.log('fundamentos_ts listo');
-const titulo = 'Preparar estructura HTML';
-let cantidadPendiente = 3;
-const panelVisible = true;
+import { actividades } from './datos.js';
+import { crearResumen, presentarResumen } from './resumen.js';
 
-cantidadPendiente = 2;
-
-console.log(titulo);
-console.log(cantidadPendiente);
-console.log(panelVisible);
+console.log(presentarResumen(crearResumen(actividades)));
