@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Actividad, EstadoActividad } from '../modelos/actividad';
+
 @Component({
   selector: 'app-tablero-prioridades',
   templateUrl: './tablero-prioridades.html',
@@ -35,5 +36,23 @@ export class TableroPrioridades {
     if (estado === 'en_progreso') return 'completada';
     return 'completada';
   }
+
+    protected readonly total = computed(() => this.actividades().length);
+
+  protected readonly pendientes = computed(
+    () => this.actividades().filter((a) => a.estado === 'pendiente').length,
+  );
+
+  protected readonly enProgreso = computed(
+    () => this.actividades().filter((a) => a.estado === 'en_progreso').length,
+  );
+
+  protected readonly completadas = computed(
+    () => this.actividades().filter((a) => a.estado === 'completada').length,
+  );
+
+  protected readonly porcentaje = computed(() =>
+    this.total() === 0 ? 0 : Math.round((this.completadas() / this.total()) * 100),
+  );
 }
 
