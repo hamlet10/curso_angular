@@ -59,6 +59,7 @@ export class TableroPrioridades {
   protected readonly termino = signal('');
   protected readonly filtroEstado = signal<FiltroEstado>('todas');
   protected readonly filtroPrioridad = signal<FiltroPrioridad>('todas');
+    protected readonly seleccionadaId = signal<number | null>(null);
   protected alternarDestacada(id: number): void {
     this.actividades.update((actuales) =>
       actuales.map((a) => (a.id === id ? { ...a, destacada: !a.destacada } : a)),
@@ -73,6 +74,7 @@ export class TableroPrioridades {
 
   protected eliminar(id: number): void {
     this.actividades.update((actuales) => actuales.filter((a) => a.id !== id));
+    this.seleccionadaId.update((actual) => (actual === id ? null : actual));
   }
 
   private siguienteEstado(estado: EstadoActividad): EstadoActividad {
@@ -125,6 +127,14 @@ export class TableroPrioridades {
       ? 'Todavía no hay actividades. Crea la primera para empezar.'
       : 'Ninguna actividad coincide con los filtros aplicados.',
   );
+
+    protected readonly seleccionada = computed(
+    () => this.actividades().find((a) => a.id === this.seleccionadaId()) ?? null,
+  );
+
+    protected seleccionar(id: number): void {
+    this.seleccionadaId.update((actual) => (actual === id ? null : id));
+  }
 
     protected buscar(evento: Event): void {
     this.termino.set((evento.target as HTMLInputElement).value);
