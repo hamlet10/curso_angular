@@ -13,6 +13,25 @@
               Prioridad {{ actividad.prioridad }}
             </p>
             <p class="estado">{{ actividad.estado }}</p>
+                        <div class="acciones">
+              <button type="button" (click)="alternarDestacada(actividad.id)">
+                {{ actividad.destacada ? 'Quitar destacado' : 'Destacar' }}
+              </button>
+              <button
+                type="button"
+                [disabled]="actividad.estado === 'completada'"
+                (click)="avanzarEstado(actividad.id)"
+              >
+                Avanzar estado
+              </button>
+              <button
+                type="button"
+                [attr.aria-label]="'Eliminar ' + actividad.titulo"
+                (click)="eliminar(actividad.id)"
+              >
+                Eliminar
+              </button>
+            </div>
           </article>
         </li>
       } @empty {

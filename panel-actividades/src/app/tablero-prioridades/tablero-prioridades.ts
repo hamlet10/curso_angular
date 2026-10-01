@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Actividad } from '../modelos/actividad';
-
+import { Actividad, EstadoActividad } from '../modelos/actividad';
 @Component({
   selector: 'app-tablero-prioridades',
   templateUrl: './tablero-prioridades.html',
@@ -14,4 +13,27 @@ export class TableroPrioridades {
     { id: 4, titulo: 'Comprobar vista estrecha', estado: 'pendiente', prioridad: 'baja', creadaEn: '2026-08-16', destacada: false },
     { id: 5, titulo: 'Ejecutar el build', estado: 'pendiente', prioridad: 'media', creadaEn: '2026-08-18', destacada: false },
   ]);
+
+    protected alternarDestacada(id: number): void {
+    this.actividades.update((actuales) =>
+      actuales.map((a) => (a.id === id ? { ...a, destacada: !a.destacada } : a)),
+    );
+  }
+
+  protected avanzarEstado(id: number): void {
+    this.actividades.update((actuales) =>
+      actuales.map((a) => (a.id === id ? { ...a, estado: this.siguienteEstado(a.estado) } : a)),
+    );
+  }
+
+  protected eliminar(id: number): void {
+    this.actividades.update((actuales) => actuales.filter((a) => a.id !== id));
+  }
+
+  private siguienteEstado(estado: EstadoActividad): EstadoActividad {
+    if (estado === 'pendiente') return 'en_progreso';
+    if (estado === 'en_progreso') return 'completada';
+    return 'completada';
+  }
 }
+
