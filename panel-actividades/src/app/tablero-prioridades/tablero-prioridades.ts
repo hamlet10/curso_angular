@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import {
   Actividad,
   EstadoActividad,
@@ -59,7 +59,7 @@ export class TableroPrioridades {
   protected readonly termino = signal('');
   protected readonly filtroEstado = signal<FiltroEstado>('todas');
   protected readonly filtroPrioridad = signal<FiltroPrioridad>('todas');
-    protected readonly seleccionadaId = signal<number | null>(null);
+  protected readonly seleccionadaId = signal<number | null>(null);
   protected alternarDestacada(id: number): void {
     this.actividades.update((actuales) =>
       actuales.map((a) => (a.id === id ? { ...a, destacada: !a.destacada } : a)),
@@ -101,7 +101,7 @@ export class TableroPrioridades {
     this.total() === 0 ? 0 : Math.round((this.completadas() / this.total()) * 100),
   );
 
-    protected readonly visibles = computed(() => {
+  protected readonly visibles = computed(() => {
     const termino = this.termino().trim().toLocaleLowerCase('es');
     const estado = this.filtroEstado();
     const prioridad = this.filtroPrioridad();
@@ -128,15 +128,15 @@ export class TableroPrioridades {
       : 'Ninguna actividad coincide con los filtros aplicados.',
   );
 
-    protected readonly seleccionada = computed(
+  protected readonly seleccionada = computed(
     () => this.actividades().find((a) => a.id === this.seleccionadaId()) ?? null,
   );
 
-    protected seleccionar(id: number): void {
+  protected seleccionar(id: number): void {
     this.seleccionadaId.update((actual) => (actual === id ? null : id));
   }
 
-    protected buscar(evento: Event): void {
+  protected buscar(evento: Event): void {
     this.termino.set((evento.target as HTMLInputElement).value);
   }
 
@@ -152,5 +152,17 @@ export class TableroPrioridades {
     this.termino.set('');
     this.filtroEstado.set('todas');
     this.filtroPrioridad.set('todas');
+  }
+
+  constructor() {
+    effect(() => {
+      console.info(`[Tablero] ${this.mostradas()} de ${this.total()} visibles`);
+    });
+  }
+
+  protected restablecer(): void {
+    this.actividades.set([]);
+    this.limpiarFiltros();
+    this.seleccionadaId.set(null);
   }
 }
