@@ -7,9 +7,10 @@ import {   Actividad,
 import { ResumenActividades } from '../resumen-actividades/resumen-actividades';
 import { ListaActividades } from '../lista-actividades/lista-actividades';
 import { FiltrosActividades } from '../filtros-actividades/filtros-actividades';
+import { PanelSeccion } from '../../compartido/panel-seccion/panel-seccion';
 
 @Component({
-  imports: [ResumenActividades,  ListaActividades, FiltrosActividades],
+  imports: [ResumenActividades,  ListaActividades, FiltrosActividades, PanelSeccion],
   selector: 'app-pagina-actividades',
   styleUrl: './pagina-actividades.css',
   templateUrl: './pagina-actividades.html',
