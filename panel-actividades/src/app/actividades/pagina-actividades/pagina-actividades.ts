@@ -6,9 +6,10 @@ import {   Actividad,
   Prioridad,} from '../../modelos/actividad';
 import { ResumenActividades } from '../resumen-actividades/resumen-actividades';
 import { ListaActividades } from '../lista-actividades/lista-actividades';
+import { FiltrosActividades } from '../filtros-actividades/filtros-actividades';
 
 @Component({
-  imports: [ResumenActividades,  ListaActividades],
+  imports: [ResumenActividades,  ListaActividades, FiltrosActividades],
   selector: 'app-pagina-actividades',
   styleUrl: './pagina-actividades.css',
   templateUrl: './pagina-actividades.html',
