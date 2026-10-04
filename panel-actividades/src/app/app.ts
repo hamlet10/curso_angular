@@ -7,7 +7,7 @@ import { PaginaActividades } from './actividades/pagina-actividades/pagina-activ
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,   ListaActividades,  PaginaActividades],
+  imports: [RouterOutlet,    PaginaActividades],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

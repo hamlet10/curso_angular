@@ -9,12 +9,3 @@
 .campo input,
 .campo select { padding: 0.4rem; }
 
-.lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
-.lista > li,
-.tarjeta,
-.metricas li,
-.campo { min-width: 0; }
-
-
-
-.vacio { border: 1px dashed #949494; border-radius: 0.5rem; padding: 1.5rem; text-align: center; }

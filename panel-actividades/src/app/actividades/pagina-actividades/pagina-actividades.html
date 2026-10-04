@@ -54,25 +54,15 @@
   <section aria-labelledby="titulo-actividades">
     <h3 id="titulo-actividades">Actividades</h3>
 
-    <ul class="lista">
-      @for (actividad of visibles(); track actividad.id) {
-                <li>
-          <app-tarjeta-actividad
-            [actividad]="actividad"
-            [seleccionada]="seleccionadaId() === actividad.id"
-            (seleccionCambiada)="seleccionar($event)"
-            (destacadoCambiado)="alternarDestacada($event)"
-            (avanceSolicitado)="avanzarEstado($event)"
-            (eliminacionSolicitada)="eliminar($event)" />
-        </li>
-      } @empty {
-        <li class="vacio">
-          <p>{{ mensajeVacio() }}</p>
-          @if (hayFiltros()) {
-            <button type="button" (click)="limpiarFiltros()">Quitar los filtros</button>
-          }
-        </li>
-      }
-    </ul>
+        <app-lista-actividades
+      [actividades]="visibles()"
+      [seleccionadaId]="seleccionadaId()"
+      [mensajeVacio]="mensajeVacio()"
+      [hayFiltros]="hayFiltros()"
+      (seleccionCambiada)="seleccionar($event)"
+      (destacadoCambiado)="alternarDestacada($event)"
+      (avanceSolicitado)="avanzarEstado($event)"
+      (eliminacionSolicitada)="eliminar($event)"
+      (limpiezaSolicitada)="limpiarFiltros()" />
   </section>
 </section>
